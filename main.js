@@ -2,28 +2,27 @@ const resetGame = document.querySelector('.reset');
 const selectGridCount = document.querySelector('.select-grid-count')
 const gridContainer = document.querySelector('.grid-container');
 const gridButtons = document.querySelectorAll('.grid-buttons');
-const grid = document.querySelector('.grid');
-let grids = document.querySelectorAll('.grid');
-let gridSize = 16;
+let gridSize = '';
+const grid = document.createElement('grid');
 
-//Event listener to load 16 grids upon page loading
-window.addEventListener('load', function() {
-    setGridSize(gridSize);
-});
+grid.classList.add('grid');
+
 
 //Click event listener for each grid size button
 gridButtons.forEach((button) => {
     button.addEventListener('click', function() {
-        let gridSize = parseInt(button.textContent)
-        updateGrids();
+        let gridSize = parseInt(button.textContent);
+        let grids = document.querySelectorAll('.grid');
+        removeGrids(grids);
         setGridStyle(gridSize);
-        setGridSize(gridSize);
+        addGrids(gridSize);
+        grids = document.querySelectorAll('.grid');
+        addGridColorChange(grids);
     })
 });
 
 //function that removes all grids
-function updateGrids() {
-    let grids = document.querySelectorAll('.grid');
+function removeGrids(grids) {
     grids.forEach(grid => {
         grid.remove();
     });
@@ -41,10 +40,20 @@ function setGridStyle(gridSize) {
 }
 
 //function that sets the grid size - runs as part of the button click event
-function setGridSize(gridSize) {
+function addGrids(gridSize) {
     let i=0;
-    while (i < (gridSize ** 2) - 1) {
+    while (i < (gridSize ** 2)) {
         gridContainer.appendChild(grid.cloneNode(true));
         i++;
     }   
+}
+
+//function that add color change capability to each grid 
+
+function addGridColorChange(grids) {
+    grids.forEach((grid) => {
+        grid.addEventListener('mouseover', function() {
+            grid.style.backgroundColor = 'black';
+        });
+    });
 }
