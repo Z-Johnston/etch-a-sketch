@@ -7,8 +7,7 @@ const grid = document.createElement('grid');
 
 grid.classList.add('grid');
 
-
-//Click event listener for each grid size button
+//Click event listener for each grid sized button
 gridButtons.forEach((button) => {
     button.addEventListener('click', function() {
         let gridSize = parseInt(button.textContent);
@@ -28,11 +27,6 @@ function removeGrids(grids) {
     });
 }
 
-//function that changes the styles of the gridButtons
-// function setGridButtonStyle(gridSize) {
-    
-// }
-
 //function that changes the styles of the grids
 function setGridStyle(gridSize) {
     grid.style.width = `${(512 / (gridSize)) - 2}px`;
@@ -48,8 +42,7 @@ function addGrids(gridSize) {
     }   
 }
 
-//function that add color change capability to each grid 
-
+//function that adds color change capability to each grid 
 function addGridColorChange(grids) {
     grids.forEach((grid) => {
         grid.addEventListener('mouseover', function() {
